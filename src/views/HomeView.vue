@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>My Recipes</h1>
-    <button @click="togglePopup">Add new Todo</button>
+    <button @click="togglePopup">Add new Recipe</button>
 
 
     <div class="recipes">
@@ -9,7 +9,7 @@
       <h2>{{ recipe.title }}</h2>
       <p>{{ recipe.description }}</p>
       <router-link :to="`/recipe/${recipe.slug}`">
-        <button>View</button>
+        <button>View Recipe</button>
       </router-link>
     </div>
     </div>
@@ -26,7 +26,7 @@
 
         <div class="group">
           <label>Description</label>
-          <textarea v-model="newRecipe.description" ></textarea>
+          <textarea onUpdate="modelValue" v-model="newRecipe.description" ></textarea>
           </div>
 
           <div class="group">
@@ -40,7 +40,7 @@
             <div class="group">
               <label>Method</label>
               <div class="method" v-for="i in newRecipe.methodRows" :key="i">
-                <textarea v-model="newRecipe.methodRows[i - 1]"></textarea>
+                <textarea @click="newRecipe.methodRows[i - 1]"></textarea>
                 </div>
                 <button type="button" @click="addNewStep">Add Step</button>
               </div>
@@ -64,8 +64,8 @@ export default {
       description: '',
       ingredients: [],
       method: [],
-      ingredientRows: 1,
-      methodRows: 1
+      ingredientRows: '',
+      methodRows: ''
     });
 
     const popupOpen = ref(false);
@@ -85,7 +85,7 @@ export default {
 
     const addNewRecipe = () => {
       newRecipe.value.slug = newRecipe.value.title.toLowerCase().replace(/\s/g, '-');
-           console.log(newRecipe.value)
+
       if(!newRecipe.value.slug) {
         alert("please enter a title")
         return;
@@ -108,11 +108,11 @@ export default {
 
    return {
     newRecipe,
+    addNewRecipe,
     togglePopup,
     popupOpen,
     addNewStep,
     addNewIngredient,
-    addNewRecipe
    }
 
   }

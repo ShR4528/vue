@@ -34,7 +34,7 @@ export default {
 	methods: {
 		cleanText (text) {
 			return text.replace(/\n/g, '<br />')
-		}
+		},
     
 	}
 

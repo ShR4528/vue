@@ -45,8 +45,4 @@ mutations: {
     state.recipes.push(recipe)
   }
   },
-  actions: {
-  },
-  modules: {
-  }
 })
